@@ -251,7 +251,15 @@ export default class Index extends Vue {
   async getAccountReport() {
     // /store/getAccountBalance
     // this.accountReport = this.$storeApi.accountReport({ companyId: this.currentCompany }, true);
-    this.accountReport = {};
+    this.accountReport = {
+      kucunxianjin: 0,
+      yueshouru: 0,
+      yinhangcunkuan: 0,
+      touzhi: 0,
+      chengbenfeiyong: 0,
+      shuijin: 0,
+      yuelirun: 0
+    };
     try {
       let nowMonth = formatDate(undefined, 'yyyy-MM');
       const [balance, form] = await Promise.all([
@@ -260,7 +268,7 @@ export default class Index extends Vue {
       ]);
 
       this.accountReport.kucunxianjin = balance.result && balance.result[0].periodEndBorrow / 100;
-      this.accountReport.yinhangcunkuan = balance.result && balance.result[1].periodEndBorrow / 100;
+      this.accountReport.yinhangcunkuan = balance.result && balance.result[1].periodEndBorrow / 100 ;
       this.accountReport.yuelirun = floatString(form.result[16].currentMonth);
       this.accountReport.yueshouru = floatString(form.result[0].currentMonth);
       this.accountReport.shuijin = floatString(form.result[2].currentMonth);
