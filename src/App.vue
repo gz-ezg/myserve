@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <!-- <keep-alive> -->
+    <keep-alive>
     <router-view :class="{ blur: isLoading }" />
-    <!-- </keep-alive> -->
+    </keep-alive>
     <loading :show="isLoading"></loading>
   </div>
 </template>

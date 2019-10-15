@@ -98,10 +98,11 @@
 import { Component, Vue } from 'vue-property-decorator';
 import CountTo from '@/components/CountTo/index.vue';
 import MyProgress from '@/components/Process/index.vue';
-import { formatDate, floatString } from '@/utils';
+import { formatDate, floatString, formatDate1} from '@/utils';
 import { Swipe, SwipeItem, ActionSheet, DropdownMenu, DropdownItem, Icon } from 'vant';
 import UserStore from '@/store/modules/user';
 import trademark from '../commercial/trademark/index.vue';
+import { removeStorage,setStorage } from '../../utils/storage';
 
 @Component({
   components: {
@@ -261,7 +262,7 @@ export default class Index extends Vue {
       yuelirun: 0
     };
     try {
-      let nowMonth = formatDate(undefined, 'yyyy-MM');
+      let nowMonth = formatDate1(undefined, 'yyyy-MM');
       const [balance, form] = await Promise.all([
         this.$storeApi.getAccountBalance({ companyId: this.currentCompany, startPeriod: nowMonth, endPeriod: nowMonth }, true),
         this.$storeApi.getCompanyReportForm({ companyId: this.currentCompany, type: 1, period: nowMonth }, true)
@@ -303,6 +304,8 @@ export default class Index extends Vue {
         this.currentCompany = parseInt(UserStore.COMPANYID);
       } else {
         UserStore.SETCOMPANYID(this.currentCompany);
+        let a = this.currentCompany.toString()
+        setStorage('customerId',a);
       }
     } catch (error) {
     } finally {
@@ -314,7 +317,9 @@ export default class Index extends Vue {
     let company = this.companyOption.find((v: any) => {
       return v.value == this.currentCompany;
     });
+    console.log(company)
     if (!company) {
+      console.log(company)
       company = this.companyOption[0];
       this.currentCompany = company.value;
     }
@@ -330,6 +335,8 @@ export default class Index extends Vue {
   }
   async created() {
     try {
+      removeStorage('companyId');
+      UserStore.REMOVECOMPANYID()
       await this.getCompanyList();
       this.initHome();
     } catch (error) {}

@@ -24,7 +24,7 @@
           <div class="title">详情</div>
         </div>
       </div>
-      <div class="page-process-item" v-if="!bussinessList.length">
+      <div  @click="navToServe('BUSSINESS')" class="page-process-item" v-if="!bussinessList.length">
         <img style="height:100%;width:100%;" src="~@/assets/guanggao2.png" />
       </div>
     </div>
