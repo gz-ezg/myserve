@@ -25,10 +25,7 @@ export default new Router({
         {
           path: '/index',
           name: 'index',
-          component: index,
-          meta:{
-            keepAlive:true
-          }
+          component: index
         },
         {
           path: 'mytools',
