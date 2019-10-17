@@ -95,7 +95,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue , Watch } from 'vue-property-decorator';
 import CountTo from '@/components/CountTo/index.vue';
 import MyProgress from '@/components/Process/index.vue';
 import { formatDate, floatString, formatDate1} from '@/utils';
@@ -105,6 +105,7 @@ import trademark from '../commercial/trademark/index.vue';
 import { removeStorage,setStorage } from '../../utils/storage';
 
 @Component({
+  name:"index",
   components: {
     [Swipe.name]: Swipe,
     [SwipeItem.name]: SwipeItem,
@@ -245,7 +246,9 @@ export default class Index extends Vue {
   // 列表选择改变
   onCompanyIdChange(e: number) {
     UserStore.SETCOMPANYID(e);
+    UserStore.SETNOWCOMPANYID(e)
     this.currentCompany = e;
+    let a = this.currentCompany.toString()
     this.initHome();
   }
   // 获取银行存款等信息
@@ -307,6 +310,13 @@ export default class Index extends Vue {
         let a = this.currentCompany.toString()
         setStorage('customerId',a);
       }
+      if (this.companyOption.findIndex( (v : any) =>{ return v.value == UserStore.NOWCOMPANYID})<0) {
+        this.currentCompany = this.companyOption[0].value;
+        this.onCompanyIdChange(this.currentCompany)
+      } else{
+        this.currentCompany = this.companyOption[this.companyOption.findIndex( (v : any) =>{ return v.value == UserStore.NOWCOMPANYID})].value;
+        this.onCompanyIdChange(this.currentCompany)
+      }
     } catch (error) {
     } finally {
       this.loading = false;
@@ -317,9 +327,7 @@ export default class Index extends Vue {
     let company = this.companyOption.find((v: any) => {
       return v.value == this.currentCompany;
     });
-    console.log(company)
     if (!company) {
-      console.log(company)
       company = this.companyOption[0];
       this.currentCompany = company.value;
     }
@@ -338,7 +346,6 @@ export default class Index extends Vue {
       removeStorage('companyId');
       UserStore.REMOVECOMPANYID()
       await this.getCompanyList();
-      this.initHome();
     } catch (error) {}
   }
 }

@@ -1,6 +1,8 @@
 <template>
   <div class="page">
-    <router-view></router-view>
+    <keep-alive>
+    <router-view ></router-view>
+    </keep-alive>
     <van-tabbar v-model="active" active-color="#E52810" fixed>
       <van-tabbar-item icon="home-o" to="/">我的服务</van-tabbar-item>
       <van-tabbar-item icon="setting-o" to="mytools">我的工具</van-tabbar-item>

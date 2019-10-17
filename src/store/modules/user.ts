@@ -18,6 +18,7 @@ class User extends VuexModule {
   public customerId: string = ''
   public companyId: string = ''
   public companyList: any
+  public nowCompanyId: string = ''
   public home: string = 'ACCOUNT'
   public currentCompanyName: string = ''
 
@@ -31,6 +32,11 @@ class User extends VuexModule {
     return this.companyId
       ? this.companyId
       : localStorage.getItem('companyId') || ''
+  }
+  get NOWCOMPANYID() {
+    return this.nowCompanyId
+      ? this.nowCompanyId
+      : localStorage.getItem('nowCompanyId') || ''
   }
 
   get CURRENTCOMPANYNAME() {
@@ -57,6 +63,12 @@ class User extends VuexModule {
   SETCOMPANYID(val: any = '') {
     this.companyId = val
     setStorage('companyId', val)
+  }
+
+  @Mutation
+  SETNOWCOMPANYID(val: any = '') {
+    this.nowCompanyId = val
+    setStorage('nowCompanyId', val)
   }
 
   @Action({})
