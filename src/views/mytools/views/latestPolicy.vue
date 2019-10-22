@@ -89,7 +89,6 @@ export default class latestPolicy extends Vue{
     onBlur(){
       let x:any= document.getElementById('input1')
       this.title1 = x.value
-      console.log(this.title1)
     }
     onLoad(){
       this.getList()
@@ -107,7 +106,6 @@ export default class latestPolicy extends Vue{
 				return this.$toast('请输入关键字');
       }
       this.list = [];
-      console.log("123")
 			this.getList();
     }
     async getList() {
@@ -132,7 +130,6 @@ export default class latestPolicy extends Vue{
 						return v;
 					})
         ];
-        console.log(this.list)
 			} catch (e) {
 				//TODO handle the exception
 			} finally {
