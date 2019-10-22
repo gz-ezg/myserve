@@ -95,4 +95,14 @@ interface IStoreApi {
     },
     loading?: boolean
   ): any
+  getProvinceList():any
+  policyList(
+    config: {
+      city: string
+      title: string
+      page: number
+      pageSize: number
+    },
+    loading?: boolean
+  ):any
 }

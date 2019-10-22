@@ -2,7 +2,7 @@
   <div class="page">
     <div class="header"><span class="header-icon"></span>实用工具</div>
     <div class="list">
-      <div @click="onNavTo('latestPolicy')" class="item">
+      <div @click="onNavTo1('latestPolicy')" class="item">
         <img class="icon" src="~@/assets/index_icons01.png" />
         <div class="title">最新政策</div>
       </div>
@@ -44,6 +44,9 @@ import { Icon } from 'vant';
 export default class MyTools extends Vue {
   onNavTo(data: string) {
     window.open(`http://park.zgcfo.com/#/pages/tools/${data}/${data}`);
+  }
+  onNavTo1(value:string){
+     this.$router.push({ name: value });
   }
 }
 </script>

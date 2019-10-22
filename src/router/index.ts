@@ -7,6 +7,7 @@ import account from './modules/account'
 import commercial from './modules/commercial'
 import myServe from './modules/myServe'
 import user from './modules/user'
+import mytools from './modules/mytools'
 Vue.use(Router)
 
 export default new Router({
@@ -46,6 +47,7 @@ export default new Router({
     ...account,
     ...commercial,
     ...myServe,
-    ...user
+    ...user,
+    ...mytools
   ]
 })

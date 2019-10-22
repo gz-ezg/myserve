@@ -181,6 +181,15 @@ export default {
     etax: {
       url: '/channel/garden/etax',
       type: 'get'
-    }
+    },
+    //园区接口
+    getProvinceList: {
+			url: '/product/area/getProvinceList',
+			type: 'get',
+    },
+    policyList: {
+			url: '/channel/garden/policyList',
+			type: 'get',
+		},
   }
 }
